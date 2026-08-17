@@ -1,0 +1,168 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Receipt - {{ order.order_number }} | KFS</title>
+  <style>
+    /* 80mm Thermal Receipt Print Styling */
+    @page {
+      size: 80mm auto;
+      margin: 0;
+    }
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      width: 78mm;
+      max-width: 78mm;
+      margin: 0 auto;
+      padding: 10px 5px;
+      color: #000;
+      background: #fff;
+      font-size: 11px;
+      line-height: 1.3;
+    }
+    .text-center { text-align: center; }
+    .text-right { text-align: right; }
+    .font-bold { font-weight: bold; }
+    .uppercase { text-transform: uppercase; }
+    .divider {
+      border-top: 1px dashed #000;
+      margin: 6px 0;
+    }
+    .logo-box {
+      border: 2px solid #000;
+      display: inline-block;
+      padding: 4px 10px;
+      font-weight: 900;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 6px 0;
+    }
+    th, td {
+      padding: 3px 0;
+      vertical-align: top;
+    }
+    th {
+      border-bottom: 1px solid #000;
+      font-size: 10px;
+    }
+    .no-print {
+      margin-bottom: 15px;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { width: 100%; padding: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Manual Print Button for Screen Preview -->
+  <div class="no-print text-center">
+    <button onclick="window.print()" style="background: #F5A623; color: #000; font-weight: bold; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer;">
+      🖨️ Click to Print Receipt
+    </button>
+  </div>
+
+  <!-- Thermal Receipt Header -->
+  <div class="text-center">
+    <div class="logo-box">KFS</div>
+    <div class="font-bold uppercase" style="font-size: 13px;">KHAN FOOD STREET</div>
+    <div>Big Flavor. Street Style.</div>
+    <div>Est. 2024 • Tel: 0344 2041131</div>
+    <div>WhatsApp: +92 344 2041131</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Order Metadata -->
+  <div>
+    <div><span class="font-bold">INVOICE #:</span> {{ order.order_number }}</div>
+    <div><span class="font-bold">DATE/TIME:</span> {{ order.created_at|date:"Y-m-d H:i" }}</div>
+    <div><span class="font-bold">CUSTOMER:</span> {{ order.customer_name }}</div>
+    {% if order.customer_phone %}
+    <div><span class="font-bold">PHONE:</span> {{ order.customer_phone }}</div>
+    {% endif %}
+    <div><span class="font-bold">TYPE:</span> {{ order.order_type }} | <span class="font-bold">PAY:</span> {{ order.payment_method }}</div>
+    <div><span class="font-bold">CASHIER:</span> {{ cashier_name }}</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Itemized Table -->
+  <table>
+    <thead>
+      <tr>
+        <th style="text-align: left;">ITEM</th>
+        <th class="text-center">QTY</th>
+        <th class="text-right">PRICE</th>
+        <th class="text-right">TOTAL</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in items %}
+      <tr>
+        <td style="text-align: left;">{{ item.item_name }}</td>
+        <td class="text-center">{{ item.quantity }}</td>
+        <td class="text-right">{{ item.unit_price|floatformat:0 }}</td>
+        <td class="text-right">{{ item.line_total|floatformat:0 }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="divider"></div>
+
+  <!-- Financial Summary -->
+  <table>
+    <tr>
+      <td class="font-bold">SUBTOTAL:</td>
+      <td class="text-right">Rs {{ order.subtotal|floatformat:0 }}</td>
+    </tr>
+    {% if order.discount > 0 %}
+    <tr>
+      <td>DISCOUNT:</td>
+      <td class="text-right">- Rs {{ order.discount|floatformat:0 }}</td>
+    </tr>
+    {% endif %}
+    {% if order.tax > 0 %}
+    <tr>
+      <td>TAX (GST):</td>
+      <td class="text-right">+ Rs {{ order.tax|floatformat:0 }}</td>
+    </tr>
+    {% endif %}
+    <tr style="font-size: 13px;">
+      <td class="font-bold">GRAND TOTAL:</td>
+      <td class="text-right font-bold">Rs {{ order.total_amount|floatformat:0 }}</td>
+    </tr>
+  </table>
+
+  <div class="divider"></div>
+
+  <!-- Footer & Barcode Placeholder -->
+  <div class="text-center" style="margin-top: 10px;">
+    <div class="font-bold" style="font-size: 10px;">THANK YOU FOR VISITING KFS!</div>
+    <div style="font-size: 9px; margin-top: 2px;">Please bring this receipt for any inquiries.</div>
+    
+    <!-- Barcode simulation -->
+    <div style="margin-top: 8px; font-family: monospace; letter-spacing: 3px; font-size: 16px;">
+      ||| | |||| | |||||| || |
+    </div>
+    <div style="font-size: 9px; letter-spacing: 1px;">* {{ order.order_number }} *</div>
+  </div>
+
+  <script>
+    // Auto-fire print dialog upon load
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        window.print();
+      }, 400);
+    });
+  </script>
+</body>
+</html>

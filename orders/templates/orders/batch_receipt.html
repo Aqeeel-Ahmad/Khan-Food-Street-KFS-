@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Batch Receipts | KFS</title>
+  <style>
+    @page { size: 80mm auto; margin: 0; }
+    body { font-family: 'Courier New', Courier, monospace; width: 78mm; margin: 0 auto; padding: 10px; color: #000; font-size: 11px; }
+    .receipt-block { page-break-after: always; margin-bottom: 20px; border-bottom: 2px solid #000; padding-bottom: 15px; }
+    .text-center { text-align: center; }
+    .text-right { text-align: right; }
+    .font-bold { font-weight: bold; }
+    .divider { border-top: 1px dashed #000; margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; }
+    @media print { .no-print { display: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="no-print text-center" style="margin-bottom: 15px;">
+    <button onclick="window.print()" style="background: #F5A623; color: #000; font-weight: bold; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer;">
+      🖨️ Batch Print All Receipts
+    </button>
+  </div>
+
+  {% for order in orders %}
+  <div class="receipt-block">
+    <div class="text-center">
+      <div class="font-bold" style="font-size: 14px;">KHAN FOOD STREET (KFS)</div>
+      <div>Big Flavor. Street Style.</div>
+      <div>Tel: 0344 2041131</div>
+    </div>
+    <div class="divider"></div>
+    <div>INVOICE #: {{ order.order_number }}</div>
+    <div>DATE: {{ order.created_at|date:"Y-m-d H:i" }}</div>
+    <div>CUSTOMER: {{ order.customer_name }}</div>
+    <div>TYPE: {{ order.order_type }} | PAY: {{ order.payment_method }}</div>
+    <div class="divider"></div>
+    <table>
+      <thead>
+        <tr><th style="text-align:left;">ITEM</th><th>QTY</th><th style="text-align:right;">TOTAL</th></tr>
+      </thead>
+      <tbody>
+        {% for item in order.items.all %}
+        <tr>
+          <td>{{ item.item_name }}</td>
+          <td class="text-center">{{ item.quantity }}</td>
+          <td class="text-right">{{ item.line_total|floatformat:0 }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="divider"></div>
+    <div class="text-right font-bold" style="font-size: 13px;">GRAND TOTAL: Rs {{ order.total_amount|floatformat:0 }}</div>
+  </div>
+  {% empty %}
+  <p class="text-center">No orders selected for batch printing.</p>
+  {% endfor %}
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => setTimeout(() => window.print(), 500));
+  </script>
+</body>
+</html>
