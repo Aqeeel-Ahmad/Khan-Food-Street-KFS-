@@ -1,0 +1,1206 @@
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu & Products | KFS (Khan Food Street)</title>
+  <meta name="description" content="KFS Khan Food Street - Delicious street pizzas, zinger burgers, loaded fries, and authentic Friday Kabuli Pulao. Order now on WhatsApp 0344 2041131!" />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            amber: {
+              400: '#F7B731',
+              500: '#F5A623',
+              600: '#D9822B',
+            },
+            streetRed: '#D32F2F',
+            matteDark: '#121212',
+            cardDark: '#1c1c1c',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- GSAP Animations & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Custom Styles & Animations -->
+  <link rel="stylesheet" href="static/css/custom.css" />
+</head>
+<body class="bg-[#121212] text-white antialiased flex flex-col min-h-screen relative selection:bg-amber-500 selection:text-black">
+
+  <!-- Floating Cartoon Ingredients Background Container -->
+  <div class="floating-container hidden md:block">
+    <img src="static/images/floating/cheese.svg" class="floating-item w-16 opacity-30" alt="cheese" />
+    <img src="static/images/floating/chili.svg" class="floating-item w-14 opacity-30" alt="chili" />
+    <img src="static/images/floating/pizza.svg" class="floating-item w-16 opacity-30" alt="pizza" />
+    <img src="static/images/floating/cheese.svg" class="floating-item w-12 opacity-25" alt="cheese" />
+  </div>
+
+  <!-- Header / Navigation Bar -->
+  <header class="sticky top-0 z-50 bg-[#121212]/90 backdrop-blur-md border-b border-amber-500/20 shadow-lg transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Brand Logo -->
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500 to-streetRed flex items-center justify-center text-black font-extrabold text-2xl shadow-lg shadow-amber-500/30 group-hover:scale-105 transition-transform">
+            KFS
+          </div>
+          <div class="flex flex-col">
+            <span class="font-heading text-xl md:text-2xl font-black tracking-tight text-white group-hover:text-amber-500 transition-colors">
+              KHAN <span class="text-amber-500">FOOD STREET</span>
+            </span>
+            <span class="text-[10px] tracking-widest text-gray-400 font-semibold uppercase">Big Flavor • Street Style</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center space-x-8 font-medium">
+          <a href="index.html" 
+             class="relative py-2 text-sm uppercase tracking-wider transition-all text-gray-300 hover:text-amber-400 font-semibold">
+            Home
+          </a>
+          <a href="menu.html" 
+             class="relative py-2 text-sm uppercase tracking-wider transition-all text-amber-500 font-extrabold after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-[70%] after:h-[2.5px] after:bg-amber-500 after:rounded-full">
+            Menu
+          </a>
+          <a href="deals.html" 
+             class="relative py-2 text-sm uppercase tracking-wider transition-all text-gray-300 hover:text-amber-400 font-semibold">
+            Deals
+          </a>
+          <a href="track.html" 
+             class="relative py-2 text-sm uppercase tracking-wider transition-all flex items-center gap-1.5 text-amber-400 hover:text-amber-300 font-semibold">
+            <i class="fa-solid fa-location-dot"></i> Track Order
+          </a>
+          <a href="gallery.html" 
+             class="relative py-2 text-sm uppercase tracking-wider transition-all text-gray-300 hover:text-amber-400 font-semibold">
+            Gallery
+          </a>
+          <a href="contact.html" 
+             class="relative py-2 text-sm uppercase tracking-wider transition-all text-gray-300 hover:text-amber-400 font-semibold">
+            Contact Us
+          </a>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden flex items-center">
+          <button id="mobile-menu-btn" type="button" class="text-gray-300 hover:text-white focus:outline-none p-2" aria-label="Toggle menu">
+            <i class="fa-solid fa-bars text-2xl"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-[#1c1c1c] border-b border-amber-500/20 px-4 pt-2 pb-6 space-y-3">
+      <a href="index.html" class="block text-gray-200 hover:text-amber-500 font-semibold py-2">Home</a>
+      <a href="menu.html" class="block text-amber-500 font-bold border-l-4 border-amber-500 pl-2 py-2">Menu & Products</a>
+      <a href="deals.html" class="block text-gray-200 hover:text-amber-500 font-semibold py-2">Deals & Offers</a>
+      <a href="track.html" class="block text-amber-400 font-bold py-2"><i class="fa-solid fa-location-dot mr-2"></i> Track Order</a>
+      <a href="gallery.html" class="block text-gray-200 hover:text-amber-500 font-semibold py-2">Photo Gallery</a>
+      <a href="contact.html" class="block text-gray-200 hover:text-amber-500 font-semibold py-2">Contact Us</a>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="flex-grow z-10">
+    
+
+<!-- Header Banner -->
+<section class="py-12 bg-gradient-to-b from-[#181818] to-[#121212] border-b border-amber-500/20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">
+    <span class="text-amber-500 font-bold uppercase tracking-widest text-xs">Freshly Prepared Street Delicacies</span>
+    <h1 class="font-heading text-4xl sm:text-5xl font-black text-white">OUR EXPLOSIVE <span class="text-amber-500">STREET MENU</span></h1>
+    <p class="text-gray-400 text-sm max-w-xl mx-auto">Select a category below to filter our mouth-watering street pizzas, zinger burgers, loaded fries, and drinks.</p>
+  </div>
+</section>
+
+<!-- Main Menu Section -->
+<section class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  
+  <!-- Category Filter Pills -->
+  <div class="flex flex-wrap items-center justify-center gap-3 mb-12">
+    <a href="/menu/?category=all" 
+       class="px-6 py-3 rounded-2xl font-bold text-sm transition-all bg-amber-500 text-black shadow-lg shadow-amber-500/30 scale-105">
+      <i class="fa-solid fa-list-ul mr-2"></i> All Delicacies
+    </a>
+
+    
+    <a href="/menu/?category=pizzas" 
+       class="px-6 py-3 rounded-2xl font-bold text-sm transition-all bg-[#1c1c1c] text-gray-300 hover:bg-gray-800 border border-gray-800">
+      <i class="fa-solid fa-pizza-slice mr-2 text-amber-400"></i> Pizzas
+    </a>
+    
+    <a href="/menu/?category=burgers-shawarmas" 
+       class="px-6 py-3 rounded-2xl font-bold text-sm transition-all bg-[#1c1c1c] text-gray-300 hover:bg-gray-800 border border-gray-800">
+      <i class="fa-solid fa-burger mr-2 text-amber-400"></i> Burgers &amp; Shawarmas
+    </a>
+    
+    <a href="/menu/?category=fries-sides" 
+       class="px-6 py-3 rounded-2xl font-bold text-sm transition-all bg-[#1c1c1c] text-gray-300 hover:bg-gray-800 border border-gray-800">
+      <i class="fa-solid fa-french-fries mr-2 text-amber-400"></i> Fries &amp; Sides
+    </a>
+    
+    <a href="/menu/?category=pasta-noodles" 
+       class="px-6 py-3 rounded-2xl font-bold text-sm transition-all bg-[#1c1c1c] text-gray-300 hover:bg-gray-800 border border-gray-800">
+      <i class="fa-solid fa-bowl-food mr-2 text-amber-400"></i> Pasta &amp; Noodles
+    </a>
+    
+    <a href="/menu/?category=beverages-shakes" 
+       class="px-6 py-3 rounded-2xl font-bold text-sm transition-all bg-[#1c1c1c] text-gray-300 hover:bg-gray-800 border border-gray-800">
+      <i class="fa-solid fa-glass-water mr-2 text-amber-400"></i> Beverages &amp; Shakes
+    </a>
+    
+  </div>
+
+  <!-- Products Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    
+    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+      
+      <div>
+        <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
+          
+            <img src="media/products/shawarma_classic_spicy.png" alt="Classic Spicy Chicken Shawarma" class="w-full h-full object-cover" />
+          
+          <div class="absolute top-3 right-3 bg-streetRed text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase">
+            Burgers &amp; Shawarmas
+          </div>
+          
+          <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md text-amber-400 text-xs px-2.5 py-1 rounded-lg border border-amber-500/30 flex items-center gap-1">
+            <i class="fa-solid fa-pepper-hot text-streetRed"></i>
+            <span>Level 3</span>
+          </div>
+          
+        </div>
+
+        <h3 class="font-heading text-2xl font-black text-white mb-2">Classic Spicy Chicken Shawarma</h3>
+        
+        <!-- Flavor Tags -->
+        <div class="flex flex-wrap gap-2 mb-3">
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Spicy
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Chili,
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Garlic
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Mayo,
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Authentic
+          </span>
+          
+        </div>
+
+        <p class="text-sm text-gray-400 leading-relaxed mb-6">Traditional pita bread wrapped around spit-roasted chicken strips, fiery red chili sauce, pickled turnip, crisp lettuce, and special garlic paste.</p>
+
+        <!-- Interactive Crust/Size Selector for Pizzas -->
+        
+      </div>
+
+      <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+        <div>
+          <span class="text-xs text-gray-400 block font-medium">Starting at</span>
+          <span class="font-heading text-2xl font-black text-amber-500">Rs 299</span>
+        </div>
+        <button onclick="orderOnWhatsApp('Classic Spicy Chicken Shawarma', '299')" 
+                class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-black font-extrabold rounded-xl transition-all text-sm flex items-center gap-2">
+          <i class="fa-brands fa-whatsapp text-lg"></i> Order Now
+        </button>
+      </div>
+
+    </div>
+    
+    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+      
+      <div>
+        <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
+          
+            <img src="media/products/fries_wedges.png" alt="Garlic Parmesan Crispy Wedges" class="w-full h-full object-cover" />
+          
+          <div class="absolute top-3 right-3 bg-streetRed text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase">
+            Fries &amp; Sides
+          </div>
+          
+        </div>
+
+        <h3 class="font-heading text-2xl font-black text-white mb-2">Garlic Parmesan Crispy Wedges</h3>
+        
+        <!-- Flavor Tags -->
+        <div class="flex flex-wrap gap-2 mb-3">
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Garlic
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Butter,
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Crispy,
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Herb
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Cheese
+          </span>
+          
+        </div>
+
+        <p class="text-sm text-gray-400 leading-relaxed mb-6">Golden skin-on potato wedges tossed in hot garlic herb butter, grated parmesan cheese, and dried parsley with ranch dipping sauce.</p>
+
+        <!-- Interactive Crust/Size Selector for Pizzas -->
+        
+      </div>
+
+      <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+        <div>
+          <span class="text-xs text-gray-400 block font-medium">Starting at</span>
+          <span class="font-heading text-2xl font-black text-amber-500">Rs 349</span>
+        </div>
+        <button onclick="orderOnWhatsApp('Garlic Parmesan Crispy Wedges', '349')" 
+                class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-black font-extrabold rounded-xl transition-all text-sm flex items-center gap-2">
+          <i class="fa-brands fa-whatsapp text-lg"></i> Order Now
+        </button>
+      </div>
+
+    </div>
+    
+    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+      
+      <div>
+        <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
+          
+            <img src="media/products/pizza_supreme.png" alt="KFS Crown Crust Pizza" class="w-full h-full object-cover" />
+          
+          <div class="absolute top-3 right-3 bg-streetRed text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase">
+            Pizzas
+          </div>
+          
+          <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md text-amber-400 text-xs px-2.5 py-1 rounded-lg border border-amber-500/30 flex items-center gap-1">
+            <i class="fa-solid fa-pepper-hot text-streetRed"></i>
+            <span>Level 2</span>
+          </div>
+          
+        </div>
+
+        <h3 class="font-heading text-2xl font-black text-white mb-2">KFS Crown Crust Pizza</h3>
+        
+        <!-- Flavor Tags -->
+        <div class="flex flex-wrap gap-2 mb-3">
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Cheese
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Loaded,
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Crown
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Crust,
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Chef
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Special
+          </span>
+          
+        </div>
+
+        <p class="text-sm text-gray-400 leading-relaxed mb-6">Loaded chicken tikka chunks, jalapenos, black olives, extra mozzarella, and stuffed cheese garlic crown crust.</p>
+
+        <!-- Interactive Crust/Size Selector for Pizzas -->
+        
+        <div class="bg-[#121212] p-3 rounded-xl mb-6 border border-gray-800 space-y-2">
+          <label class="text-xs font-bold text-gray-300 block">Select Pizza Size & Crust:</label>
+          <select id="size-1" class="w-full bg-[#1c1c1c] text-amber-400 border border-amber-500/30 rounded-lg px-3 py-2 text-xs font-semibold focus:outline-none">
+            <option value="Small">Small 8" (Regular Crust) - Rs 1299</option>
+            <option value="Medium">Medium 11" (Extra Cheese) - Rs 1699</option>
+            <option value="Large" selected>Large 14" (Stuffed Crown Crust) - Rs 1999</option>
+          </select>
+        </div>
+        
+      </div>
+
+      <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+        <div>
+          <span class="text-xs text-gray-400 block font-medium">Starting at</span>
+          <span class="font-heading text-2xl font-black text-amber-500">Rs 1299</span>
+        </div>
+        <button onclick="orderOnWhatsApp('KFS Crown Crust Pizza', '1299')" 
+                class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-black font-extrabold rounded-xl transition-all text-sm flex items-center gap-2">
+          <i class="fa-brands fa-whatsapp text-lg"></i> Order Now
+        </button>
+      </div>
+
+    </div>
+    
+    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+      
+      <div>
+        <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
+          
+            <img src="media/products/shawarma_special.png" alt="KFS Special Cheese Loaded Shawarma" class="w-full h-full object-cover" />
+          
+          <div class="absolute top-3 right-3 bg-streetRed text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase">
+            Burgers &amp; Shawarmas
+          </div>
+          
+          <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md text-amber-400 text-xs px-2.5 py-1 rounded-lg border border-amber-500/30 flex items-center gap-1">
+            <i class="fa-solid fa-pepper-hot text-streetRed"></i>
+            <span>Level 2</span>
+          </div>
+          
+        </div>
+
+        <h3 class="font-heading text-2xl font-black text-white mb-2">KFS Special Cheese Loaded Shawarma</h3>
+        
+        <!-- Flavor Tags -->
+        <div class="flex flex-wrap gap-2 mb-3">
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Cheese
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Loaded,
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Garlic
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Mayo,
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Street
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Style
+          </span>
+          
+        </div>
+
+        <p class="text-sm text-gray-400 leading-relaxed mb-6">Authentic street style pita wrap loaded with flame-grilled sliced chicken, homemade garlic mayonnaise, melted mozzarella cheese, crunchy cabbage, and pickled jalapenos.</p>
+
+        <!-- Interactive Crust/Size Selector for Pizzas -->
+        
+      </div>
+
+      <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+        <div>
+          <span class="text-xs text-gray-400 block font-medium">Starting at</span>
+          <span class="font-heading text-2xl font-black text-amber-500">Rs 399</span>
+        </div>
+        <button onclick="orderOnWhatsApp('KFS Special Cheese Loaded Shawarma', '399')" 
+                class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-black font-extrabold rounded-xl transition-all text-sm flex items-center gap-2">
+          <i class="fa-brands fa-whatsapp text-lg"></i> Order Now
+        </button>
+      </div>
+
+    </div>
+    
+    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+      
+      <div>
+        <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
+          
+            <img src="media/products/burger_zinger.png" alt="Monster Zinger Burger" class="w-full h-full object-cover" />
+          
+          <div class="absolute top-3 right-3 bg-streetRed text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase">
+            Burgers &amp; Shawarmas
+          </div>
+          
+          <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md text-amber-400 text-xs px-2.5 py-1 rounded-lg border border-amber-500/30 flex items-center gap-1">
+            <i class="fa-solid fa-pepper-hot text-streetRed"></i>
+            <span>Level 3</span>
+          </div>
+          
+        </div>
+
+        <h3 class="font-heading text-2xl font-black text-white mb-2">Monster Zinger Burger</h3>
+        
+        <!-- Flavor Tags -->
+        <div class="flex flex-wrap gap-2 mb-3">
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Extra
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Spicy,
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Double
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Patty,
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Crunchy
+          </span>
+          
+        </div>
+
+        <p class="text-sm text-gray-400 leading-relaxed mb-6">Double crisp fried chicken breast fillets with liquid melted cheddar, spicy mayonnaise, and pickled jalapenos.</p>
+
+        <!-- Interactive Crust/Size Selector for Pizzas -->
+        
+      </div>
+
+      <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+        <div>
+          <span class="text-xs text-gray-400 block font-medium">Starting at</span>
+          <span class="font-heading text-2xl font-black text-amber-500">Rs 699</span>
+        </div>
+        <button onclick="orderOnWhatsApp('Monster Zinger Burger', '699')" 
+                class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-black font-extrabold rounded-xl transition-all text-sm flex items-center gap-2">
+          <i class="fa-brands fa-whatsapp text-lg"></i> Order Now
+        </button>
+      </div>
+
+    </div>
+    
+    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+      
+      <div>
+        <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
+          
+            <img src="media/products/nutella_oreo_shake.png" alt="Nutella Oreo Madness Shake" class="w-full h-full object-cover" />
+          
+          <div class="absolute top-3 right-3 bg-streetRed text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase">
+            Beverages &amp; Shakes
+          </div>
+          
+        </div>
+
+        <h3 class="font-heading text-2xl font-black text-white mb-2">Nutella Oreo Madness Shake</h3>
+        
+        <!-- Flavor Tags -->
+        <div class="flex flex-wrap gap-2 mb-3">
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Nutella,
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Oreo,
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Rich
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Shake
+          </span>
+          
+        </div>
+
+        <p class="text-sm text-gray-400 leading-relaxed mb-6">Rich thick gourmet milkshake blended with Nutella chocolate spread, crushed Oreo cookies, fluffy whipped cream, and chocolate stick.</p>
+
+        <!-- Interactive Crust/Size Selector for Pizzas -->
+        
+      </div>
+
+      <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+        <div>
+          <span class="text-xs text-gray-400 block font-medium">Starting at</span>
+          <span class="font-heading text-2xl font-black text-amber-500">Rs 449</span>
+        </div>
+        <button onclick="orderOnWhatsApp('Nutella Oreo Madness Shake', '449')" 
+                class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-black font-extrabold rounded-xl transition-all text-sm flex items-center gap-2">
+          <i class="fa-brands fa-whatsapp text-lg"></i> Order Now
+        </button>
+      </div>
+
+    </div>
+    
+    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+      
+      <div>
+        <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
+          
+            <img src="media/products/burger_zinger.png" alt="Smokey Beef Charcoal Burger" class="w-full h-full object-cover" />
+          
+          <div class="absolute top-3 right-3 bg-streetRed text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase">
+            Burgers &amp; Shawarmas
+          </div>
+          
+          <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md text-amber-400 text-xs px-2.5 py-1 rounded-lg border border-amber-500/30 flex items-center gap-1">
+            <i class="fa-solid fa-pepper-hot text-streetRed"></i>
+            <span>Level 2</span>
+          </div>
+          
+        </div>
+
+        <h3 class="font-heading text-2xl font-black text-white mb-2">Smokey Beef Charcoal Burger</h3>
+        
+        <!-- Flavor Tags -->
+        <div class="flex flex-wrap gap-2 mb-3">
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Charcoal
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Grilled,
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Smoky
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            BBQ
+          </span>
+          
+        </div>
+
+        <p class="text-sm text-gray-400 leading-relaxed mb-6">100% pure beef patty grilled over charcoal coals topped with caramelized onions and smokey barbecue sauce.</p>
+
+        <!-- Interactive Crust/Size Selector for Pizzas -->
+        
+      </div>
+
+      <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+        <div>
+          <span class="text-xs text-gray-400 block font-medium">Starting at</span>
+          <span class="font-heading text-2xl font-black text-amber-500">Rs 749</span>
+        </div>
+        <button onclick="orderOnWhatsApp('Smokey Beef Charcoal Burger', '749')" 
+                class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-black font-extrabold rounded-xl transition-all text-sm flex items-center gap-2">
+          <i class="fa-brands fa-whatsapp text-lg"></i> Order Now
+        </button>
+      </div>
+
+    </div>
+    
+    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+      
+      <div>
+        <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
+          
+            <img src="media/products/spicy_street_noodles.png" alt="Spicy Street Wok Noodles" class="w-full h-full object-cover" />
+          
+          <div class="absolute top-3 right-3 bg-streetRed text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase">
+            Pasta &amp; Noodles
+          </div>
+          
+          <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md text-amber-400 text-xs px-2.5 py-1 rounded-lg border border-amber-500/30 flex items-center gap-1">
+            <i class="fa-solid fa-pepper-hot text-streetRed"></i>
+            <span>Level 3</span>
+          </div>
+          
+        </div>
+
+        <h3 class="font-heading text-2xl font-black text-white mb-2">Spicy Street Wok Noodles</h3>
+        
+        <!-- Flavor Tags -->
+        <div class="flex flex-wrap gap-2 mb-3">
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Wok
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Tossed,
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Chili
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Soy,
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Spicy
+          </span>
+          
+        </div>
+
+        <p class="text-sm text-gray-400 leading-relaxed mb-6">High-heat wok tossed egg noodles with juicy grilled chicken, crunchy bell peppers, spicy chili oils, and savory soy glaze.</p>
+
+        <!-- Interactive Crust/Size Selector for Pizzas -->
+        
+      </div>
+
+      <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+        <div>
+          <span class="text-xs text-gray-400 block font-medium">Starting at</span>
+          <span class="font-heading text-2xl font-black text-amber-500">Rs 699</span>
+        </div>
+        <button onclick="orderOnWhatsApp('Spicy Street Wok Noodles', '699')" 
+                class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-black font-extrabold rounded-xl transition-all text-sm flex items-center gap-2">
+          <i class="fa-brands fa-whatsapp text-lg"></i> Order Now
+        </button>
+      </div>
+
+    </div>
+    
+    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+      
+      <div>
+        <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
+          
+            <img src="media/products/pizza_supreme.png" alt="Street Pepperoni Feast" class="w-full h-full object-cover" />
+          
+          <div class="absolute top-3 right-3 bg-streetRed text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase">
+            Pizzas
+          </div>
+          
+        </div>
+
+        <h3 class="font-heading text-2xl font-black text-white mb-2">Street Pepperoni Feast</h3>
+        
+        <!-- Flavor Tags -->
+        <div class="flex flex-wrap gap-2 mb-3">
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Classic
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Pepperoni,
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Extra
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Cheese
+          </span>
+          
+        </div>
+
+        <p class="text-sm text-gray-400 leading-relaxed mb-6">Double crispy beef pepperoni slices with melted aged mozzarella and spicy tomato sauce.</p>
+
+        <!-- Interactive Crust/Size Selector for Pizzas -->
+        
+        <div class="bg-[#121212] p-3 rounded-xl mb-6 border border-gray-800 space-y-2">
+          <label class="text-xs font-bold text-gray-300 block">Select Pizza Size & Crust:</label>
+          <select id="size-2" class="w-full bg-[#1c1c1c] text-amber-400 border border-amber-500/30 rounded-lg px-3 py-2 text-xs font-semibold focus:outline-none">
+            <option value="Small">Small 8" (Regular Crust) - Rs 1199</option>
+            <option value="Medium">Medium 11" (Extra Cheese) - Rs 1599</option>
+            <option value="Large" selected>Large 14" (Stuffed Crown Crust) - Rs 1899</option>
+          </select>
+        </div>
+        
+      </div>
+
+      <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+        <div>
+          <span class="text-xs text-gray-400 block font-medium">Starting at</span>
+          <span class="font-heading text-2xl font-black text-amber-500">Rs 1199</span>
+        </div>
+        <button onclick="orderOnWhatsApp('Street Pepperoni Feast', '1199')" 
+                class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-black font-extrabold rounded-xl transition-all text-sm flex items-center gap-2">
+          <i class="fa-brands fa-whatsapp text-lg"></i> Order Now
+        </button>
+      </div>
+
+    </div>
+    
+    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+      
+      <div>
+        <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
+          
+            <img src="media/products/spicy_street_noodles.png" alt="Baked Cheesy Macaroni Pasta" class="w-full h-full object-cover" />
+          
+          <div class="absolute top-3 right-3 bg-streetRed text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase">
+            Pasta &amp; Noodles
+          </div>
+          
+        </div>
+
+        <h3 class="font-heading text-2xl font-black text-white mb-2">Baked Cheesy Macaroni Pasta</h3>
+        
+        <!-- Flavor Tags -->
+        <div class="flex flex-wrap gap-2 mb-3">
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Cheese
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Baked,
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Creamy,
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Comfort
+          </span>
+          
+        </div>
+
+        <p class="text-sm text-gray-400 leading-relaxed mb-6">Elbow pasta smothered in rich melted cheddar &amp; mozzarella cheese sauce, baked golden brown with crispy herb breadcrumbs.</p>
+
+        <!-- Interactive Crust/Size Selector for Pizzas -->
+        
+      </div>
+
+      <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+        <div>
+          <span class="text-xs text-gray-400 block font-medium">Starting at</span>
+          <span class="font-heading text-2xl font-black text-amber-500">Rs 749</span>
+        </div>
+        <button onclick="orderOnWhatsApp('Baked Cheesy Macaroni Pasta', '749')" 
+                class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-black font-extrabold rounded-xl transition-all text-sm flex items-center gap-2">
+          <i class="fa-brands fa-whatsapp text-lg"></i> Order Now
+        </button>
+      </div>
+
+    </div>
+    
+    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+      
+      <div>
+        <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
+          
+            <img src="media/products/chicken_alfredo.png" alt="Creamy Chicken Alfredo Pasta" class="w-full h-full object-cover" />
+          
+          <div class="absolute top-3 right-3 bg-streetRed text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase">
+            Pasta &amp; Noodles
+          </div>
+          
+        </div>
+
+        <h3 class="font-heading text-2xl font-black text-white mb-2">Creamy Chicken Alfredo Pasta</h3>
+        
+        <!-- Flavor Tags -->
+        <div class="flex flex-wrap gap-2 mb-3">
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Creamy
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            White
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Sauce,
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Grilled
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Chicken
+          </span>
+          
+        </div>
+
+        <p class="text-sm text-gray-400 leading-relaxed mb-6">Penne pasta tossed in rich white garlic cream sauce, grilled herb chicken strips, and parmesan.</p>
+
+        <!-- Interactive Crust/Size Selector for Pizzas -->
+        
+      </div>
+
+      <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+        <div>
+          <span class="text-xs text-gray-400 block font-medium">Starting at</span>
+          <span class="font-heading text-2xl font-black text-amber-500">Rs 799</span>
+        </div>
+        <button onclick="orderOnWhatsApp('Creamy Chicken Alfredo Pasta', '799')" 
+                class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-black font-extrabold rounded-xl transition-all text-sm flex items-center gap-2">
+          <i class="fa-brands fa-whatsapp text-lg"></i> Order Now
+        </button>
+      </div>
+
+    </div>
+    
+    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+      
+      <div>
+        <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
+          
+            <img src="media/products/electric_blue_margarita.png" alt="Electric Blue Mint Margarita" class="w-full h-full object-cover" />
+          
+          <div class="absolute top-3 right-3 bg-streetRed text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase">
+            Beverages &amp; Shakes
+          </div>
+          
+        </div>
+
+        <h3 class="font-heading text-2xl font-black text-white mb-2">Electric Blue Mint Margarita</h3>
+        
+        <!-- Flavor Tags -->
+        <div class="flex flex-wrap gap-2 mb-3">
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Refreshing,
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Ice
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Cold
+          </span>
+          
+        </div>
+
+        <p class="text-sm text-gray-400 leading-relaxed mb-6">Crushed ice blended with fresh mint leaves, lime juice, sprite, and blue curacao syrup.</p>
+
+        <!-- Interactive Crust/Size Selector for Pizzas -->
+        
+      </div>
+
+      <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+        <div>
+          <span class="text-xs text-gray-400 block font-medium">Starting at</span>
+          <span class="font-heading text-2xl font-black text-amber-500">Rs 299</span>
+        </div>
+        <button onclick="orderOnWhatsApp('Electric Blue Mint Margarita', '299')" 
+                class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-black font-extrabold rounded-xl transition-all text-sm flex items-center gap-2">
+          <i class="fa-brands fa-whatsapp text-lg"></i> Order Now
+        </button>
+      </div>
+
+    </div>
+    
+    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+      
+      <div>
+        <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
+          
+            <img src="media/products/fries_wedges.png" alt="Firecracker Crispy Chicken Strips" class="w-full h-full object-cover" />
+          
+          <div class="absolute top-3 right-3 bg-streetRed text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase">
+            Fries &amp; Sides
+          </div>
+          
+          <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md text-amber-400 text-xs px-2.5 py-1 rounded-lg border border-amber-500/30 flex items-center gap-1">
+            <i class="fa-solid fa-pepper-hot text-streetRed"></i>
+            <span>Level 3</span>
+          </div>
+          
+        </div>
+
+        <h3 class="font-heading text-2xl font-black text-white mb-2">Firecracker Crispy Chicken Strips</h3>
+        
+        <!-- Flavor Tags -->
+        <div class="flex flex-wrap gap-2 mb-3">
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Spicy
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Buffalo,
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Crunchy,
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Tender
+          </span>
+          
+        </div>
+
+        <p class="text-sm text-gray-400 leading-relaxed mb-6">5 tenderloin crispy chicken strips coated in spicy street buffalo glaze served with cool mayo dip.</p>
+
+        <!-- Interactive Crust/Size Selector for Pizzas -->
+        
+      </div>
+
+      <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+        <div>
+          <span class="text-xs text-gray-400 block font-medium">Starting at</span>
+          <span class="font-heading text-2xl font-black text-amber-500">Rs 499</span>
+        </div>
+        <button onclick="orderOnWhatsApp('Firecracker Crispy Chicken Strips', '499')" 
+                class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-black font-extrabold rounded-xl transition-all text-sm flex items-center gap-2">
+          <i class="fa-brands fa-whatsapp text-lg"></i> Order Now
+        </button>
+      </div>
+
+    </div>
+    
+    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+      
+      <div>
+        <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
+          
+            <img src="media/products/cheesy_fries.png" alt="KFS Loaded Cheesy Fries" class="w-full h-full object-cover" />
+          
+          <div class="absolute top-3 right-3 bg-streetRed text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase">
+            Fries &amp; Sides
+          </div>
+          
+          <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md text-amber-400 text-xs px-2.5 py-1 rounded-lg border border-amber-500/30 flex items-center gap-1">
+            <i class="fa-solid fa-pepper-hot text-streetRed"></i>
+            <span>Level 2</span>
+          </div>
+          
+        </div>
+
+        <h3 class="font-heading text-2xl font-black text-white mb-2">KFS Loaded Cheesy Fries</h3>
+        
+        <!-- Flavor Tags -->
+        <div class="flex flex-wrap gap-2 mb-3">
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Cheese
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Lava,
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Crispy
+          </span>
+          
+        </div>
+
+        <p class="text-sm text-gray-400 leading-relaxed mb-6">Bucket of crispy golden french fries topped with hot liquid cheddar, chicken chunks, and secret spice blend.</p>
+
+        <!-- Interactive Crust/Size Selector for Pizzas -->
+        
+      </div>
+
+      <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+        <div>
+          <span class="text-xs text-gray-400 block font-medium">Starting at</span>
+          <span class="font-heading text-2xl font-black text-amber-500">Rs 449</span>
+        </div>
+        <button onclick="orderOnWhatsApp('KFS Loaded Cheesy Fries', '449')" 
+                class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-black font-extrabold rounded-xl transition-all text-sm flex items-center gap-2">
+          <i class="fa-brands fa-whatsapp text-lg"></i> Order Now
+        </button>
+      </div>
+
+    </div>
+    
+    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+      
+      <div>
+        <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
+          
+            <img src="media/products/nutella_oreo_shake.png" alt="Mango Passion Street Chiller" class="w-full h-full object-cover" />
+          
+          <div class="absolute top-3 right-3 bg-streetRed text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase">
+            Beverages &amp; Shakes
+          </div>
+          
+        </div>
+
+        <h3 class="font-heading text-2xl font-black text-white mb-2">Mango Passion Street Chiller</h3>
+        
+        <!-- Flavor Tags -->
+        <div class="flex flex-wrap gap-2 mb-3">
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Mango
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Refresh,
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Chilled,
+          </span>
+          
+          <span class="text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-md font-semibold">
+            Fruity
+          </span>
+          
+        </div>
+
+        <p class="text-sm text-gray-400 leading-relaxed mb-6">Ice-cold refreshing splash of sweet mango pulp, passion fruit fizz, crushed ice, fresh mint leaves, and lime juice.</p>
+
+        <!-- Interactive Crust/Size Selector for Pizzas -->
+        
+      </div>
+
+      <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+        <div>
+          <span class="text-xs text-gray-400 block font-medium">Starting at</span>
+          <span class="font-heading text-2xl font-black text-amber-500">Rs 349</span>
+        </div>
+        <button onclick="orderOnWhatsApp('Mango Passion Street Chiller', '349')" 
+                class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-black font-extrabold rounded-xl transition-all text-sm flex items-center gap-2">
+          <i class="fa-brands fa-whatsapp text-lg"></i> Order Now
+        </button>
+      </div>
+
+    </div>
+    
+  </div>
+
+</section>
+
+
+  </main>
+
+  <!-- Persistent Floating WhatsApp Direct Contact Button -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <a href="https://wa.me/923442041131?text=Hello%20KFS!%20I%20am%20interested%20in%20ordering%20food." target="_blank" 
+       class="pulse-badge w-14 h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full flex items-center justify-center text-3xl shadow-2xl hover:scale-110 transition-all border-2 border-white/20"
+       title="Chat & Order on WhatsApp (+92 344 2041131)">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-[#181818] border-t border-amber-500/20 pt-16 pb-12 mt-20 relative z-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+        
+        <!-- Col 1: Brand Info -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center text-black font-bold text-xl">KFS</div>
+            <span class="font-heading text-xl font-black text-white">KHAN <span class="text-amber-500">FOOD STREET</span></span>
+          </div>
+          <p class="text-sm text-gray-400 leading-relaxed">
+            Serving the boldest street flavors in town! From authentic Friday Kabuli Pulao to cheesy loaded pizzas and spicy zinger burgers.
+          </p>
+          <div class="flex space-x-4 pt-2">
+            <a href="#" class="w-9 h-9 rounded-full bg-[#242424] hover:bg-amber-500 hover:text-black transition-colors flex items-center justify-center text-gray-300"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="w-9 h-9 rounded-full bg-[#242424] hover:bg-amber-500 hover:text-black transition-colors flex items-center justify-center text-gray-300"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="w-9 h-9 rounded-full bg-[#242424] hover:bg-amber-500 hover:text-black transition-colors flex items-center justify-center text-gray-300"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <!-- Col 2: Quick Links -->
+        <div>
+          <h4 class="text-lg font-bold text-amber-500 mb-4 font-heading">Quick Links</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="index.html" class="hover:text-white transition-colors">Home Page</a></li>
+            <li><a href="menu.html" class="hover:text-white transition-colors">Explore Menu</a></li>
+            <li><a href="deals.html" class="hover:text-white transition-colors">Deals & Offers</a></li>
+            <li><a href="gallery.html" class="hover:text-white transition-colors">Photo Gallery</a></li>
+            <li><a href="contact.html" class="hover:text-white transition-colors">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Operational Hours -->
+        <div>
+          <h4 class="text-lg font-bold text-amber-500 mb-4 font-heading">Opening Hours</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li class="flex justify-between border-b border-gray-800 pb-1">
+              <span>Monday - Thursday:</span>
+              <span class="text-white font-medium">4:00 PM - 2:00 AM</span>
+            </li>
+            <li class="flex justify-between border-b border-gray-800 pb-1 text-amber-400 font-semibold">
+              <span>Friday (Kabuli Pulao):</span>
+              <span>12:30 PM - 2:30 AM</span>
+            </li>
+            <li class="flex justify-between border-b border-gray-800 pb-1">
+              <span>Saturday - Sunday:</span>
+              <span class="text-white font-medium">2:00 PM - 3:00 AM</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Contact & WhatsApp -->
+        <div>
+          <h4 class="text-lg font-bold text-amber-500 mb-4 font-heading">Direct Contact</h4>
+          <div class="space-y-3 text-sm text-gray-400">
+            <p class="flex items-center gap-3">
+              <i class="fa-solid fa-phone text-amber-500"></i>
+              <span>+92 344 2041131</span>
+            </p>
+            <p class="flex items-center gap-3">
+              <i class="fa-brands fa-whatsapp text-emerald-400 text-lg"></i>
+              <span>0344 2041131</span>
+            </p>
+            <p class="flex items-center gap-3">
+              <i class="fa-solid fa-location-dot text-streetRed text-lg"></i>
+              <span>Khan Food Street Hub, Main Commercial Boulevard</span>
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="border-t border-gray-800 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+        <p>&copy; 2026 KFS (Khan Food Street). All Rights Reserved.</p>
+        <p class="mt-2 md:mt-0">Designed & Powered with Passion for Good Food.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script for Mobile Navigation -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('mobile-menu-btn');
+      const menu = document.getElementById('mobile-menu');
+
+      if (btn && menu) {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu if user clicks or touches anywhere outside
+        const closeMenuOutside = (e) => {
+          if (!menu.contains(e.target) && !btn.contains(e.target)) {
+            menu.classList.add('hidden');
+          }
+        };
+
+        document.addEventListener('click', closeMenuOutside);
+        document.addEventListener('touchstart', closeMenuOutside, { passive: true });
+      }
+    });
+  </script>
+  <script src="static/js/animations.js"></script>
+</body>
+</html>

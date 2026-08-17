@@ -1,0 +1,544 @@
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KFS (Khan Food Street) | Big Flavor. Street Style.</title>
+  <meta name="description" content="KFS Khan Food Street - Delicious street pizzas, zinger burgers, loaded fries, and authentic Friday Kabuli Pulao. Order now on WhatsApp 0344 2041131!" />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            amber: {
+              400: '#F7B731',
+              500: '#F5A623',
+              600: '#D9822B',
+            },
+            streetRed: '#D32F2F',
+            matteDark: '#121212',
+            cardDark: '#1c1c1c',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- GSAP Animations & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Custom Styles & Animations -->
+  <link rel="stylesheet" href="static/css/custom.css" />
+</head>
+<body class="bg-[#121212] text-white antialiased flex flex-col min-h-screen relative selection:bg-amber-500 selection:text-black">
+
+  <!-- Floating Cartoon Ingredients Background Container -->
+  <div class="floating-container hidden md:block">
+    <img src="static/images/floating/cheese.svg" class="floating-item w-16 opacity-30" alt="cheese" />
+    <img src="static/images/floating/chili.svg" class="floating-item w-14 opacity-30" alt="chili" />
+    <img src="static/images/floating/pizza.svg" class="floating-item w-16 opacity-30" alt="pizza" />
+    <img src="static/images/floating/cheese.svg" class="floating-item w-12 opacity-25" alt="cheese" />
+  </div>
+
+  <!-- Header / Navigation Bar -->
+  <header class="sticky top-0 z-50 bg-[#121212]/90 backdrop-blur-md border-b border-amber-500/20 shadow-lg transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Brand Logo -->
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500 to-streetRed flex items-center justify-center text-black font-extrabold text-2xl shadow-lg shadow-amber-500/30 group-hover:scale-105 transition-transform">
+            KFS
+          </div>
+          <div class="flex flex-col">
+            <span class="font-heading text-xl md:text-2xl font-black tracking-tight text-white group-hover:text-amber-500 transition-colors">
+              KHAN <span class="text-amber-500">FOOD STREET</span>
+            </span>
+            <span class="text-[10px] tracking-widest text-gray-400 font-semibold uppercase">Big Flavor • Street Style</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center space-x-8 font-medium">
+          <a href="index.html" 
+             class="relative py-2 text-sm uppercase tracking-wider transition-all text-amber-500 font-extrabold after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-[70%] after:h-[2.5px] after:bg-amber-500 after:rounded-full">
+            Home
+          </a>
+          <a href="menu.html" 
+             class="relative py-2 text-sm uppercase tracking-wider transition-all text-gray-300 hover:text-amber-400 font-semibold">
+            Menu
+          </a>
+          <a href="deals.html" 
+             class="relative py-2 text-sm uppercase tracking-wider transition-all text-gray-300 hover:text-amber-400 font-semibold">
+            Deals
+          </a>
+          <a href="track.html" 
+             class="relative py-2 text-sm uppercase tracking-wider transition-all flex items-center gap-1.5 text-amber-400 hover:text-amber-300 font-semibold">
+            <i class="fa-solid fa-location-dot"></i> Track Order
+          </a>
+          <a href="gallery.html" 
+             class="relative py-2 text-sm uppercase tracking-wider transition-all text-gray-300 hover:text-amber-400 font-semibold">
+            Gallery
+          </a>
+          <a href="contact.html" 
+             class="relative py-2 text-sm uppercase tracking-wider transition-all text-gray-300 hover:text-amber-400 font-semibold">
+            Contact Us
+          </a>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden flex items-center">
+          <button id="mobile-menu-btn" type="button" class="text-gray-300 hover:text-white focus:outline-none p-2" aria-label="Toggle menu">
+            <i class="fa-solid fa-bars text-2xl"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-[#1c1c1c] border-b border-amber-500/20 px-4 pt-2 pb-6 space-y-3">
+      <a href="index.html" class="block text-amber-500 font-bold border-l-4 border-amber-500 pl-2 py-2">Home</a>
+      <a href="menu.html" class="block text-gray-200 hover:text-amber-500 font-semibold py-2">Menu & Products</a>
+      <a href="deals.html" class="block text-gray-200 hover:text-amber-500 font-semibold py-2">Deals & Offers</a>
+      <a href="track.html" class="block text-amber-400 font-bold py-2"><i class="fa-solid fa-location-dot mr-2"></i> Track Order</a>
+      <a href="gallery.html" class="block text-gray-200 hover:text-amber-500 font-semibold py-2">Photo Gallery</a>
+      <a href="contact.html" class="block text-gray-200 hover:text-amber-500 font-semibold py-2">Contact Us</a>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="flex-grow z-10">
+    
+
+<!-- HERO SECTION -->
+<section class="relative min-h-[90vh] flex items-center pt-8 pb-16 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      
+      <!-- Hero Left: Text Content & CTAs -->
+      <div class="lg:col-span-7 z-10 space-y-6 text-center lg:text-left">
+        <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 px-4 py-2 rounded-full text-amber-400 font-semibold text-xs tracking-wider uppercase mb-2 animate-pulse">
+          <i class="fa-solid fa-fire text-amber-500"></i> The Ultimate Street Food Experience
+        </div>
+
+        <h1 class="hero-title font-heading text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-none text-white">
+          BIG FLAVOR. <br />
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-amber-400 to-streetRed">
+            STREET STYLE.
+          </span>
+        </h1>
+
+        <p class="hero-subtitle text-lg sm:text-xl text-gray-300 max-w-2xl font-light leading-relaxed">
+          Craving fiery zinger burgers, loaded crown crust pizzas, or authentic slow-cooked <span class="text-amber-400 font-semibold">Friday Kabuli Pulao</span>? KFS serves raw street passion straight to your table!
+        </p>
+
+        <!-- CTA Action Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+          <a href="menu.html" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-streetRed text-black font-extrabold text-base rounded-2xl shadow-xl shadow-amber-500/25 hover:shadow-amber-500/40 hover:scale-105 transition-all text-center flex items-center justify-center gap-3">
+            <i class="fa-solid fa-utensils"></i> Explore Menu
+          </a>
+          <a href="https://wa.me/923442041131?text=Hi%20KFS!%20I%20want%20to%20place%20an%20order." target="_blank" class="w-full sm:w-auto px-8 py-4 bg-[#1c1c1c] border-2 border-emerald-500 text-emerald-400 hover:bg-emerald-500 hover:text-black font-extrabold text-base rounded-2xl transition-all text-center flex items-center justify-center gap-3 shadow-lg">
+            <i class="fa-brands fa-whatsapp text-xl"></i> Order on WhatsApp
+          </a>
+        </div>
+
+        <!-- Phone & Quick Info -->
+        <div class="pt-6 flex items-center justify-center lg:justify-start gap-6 text-sm text-gray-400">
+          <span class="flex items-center gap-2"><i class="fa-solid fa-truck-fast text-amber-500"></i> Fast Delivery</span>
+          <span class="flex items-center gap-2"><i class="fa-solid fa-badge-check text-emerald-400"></i> 100% Fresh Halal</span>
+          <span class="flex items-center gap-2"><i class="fa-solid fa-star text-amber-400"></i> 4.9/5 Rating</span>
+        </div>
+      </div>
+
+      <!-- Hero Right: Cartoon Mascot Illustration -->
+      <div class="lg:col-span-5 relative flex justify-center z-10">
+        <div class="hero-mascot relative w-full max-w-md">
+          <!-- Ambient Glow Effect behind mascot -->
+          <div class="absolute inset-0 bg-gradient-to-r from-amber-500/30 to-streetRed/30 rounded-full blur-3xl transform scale-90"></div>
+          
+          <img src="static/images/mascot.png" alt="KFS Cartoon Mascot" class="relative z-10 w-full drop-shadow-[0_20px_30px_rgba(245,166,35,0.3)] animate-bounce" style="animation-duration: 4s;" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MOVING CARTOON DELIVERY SCOOTER BANNER -->
+<div class="w-full bg-amber-500/10 border-y border-amber-500/20 py-3 overflow-hidden">
+  <div class="scooter-animation flex items-center gap-4">
+    <img src="static/images/floating/scooter.svg" class="w-16 h-12 inline-block" alt="scooter" />
+    <span class="font-heading font-black text-amber-400 uppercase tracking-widest text-sm whitespace-nowrap">
+      ⚡ KFS EXTREME SPEED STREET DELIVERY ON THE WAY! CALL NOW: 0344 2041131 ⚡
+    </span>
+  </div>
+</div>
+
+<!-- SPECIAL OFFER HIGHLIGHT BOX (FRIDAY KABULI PULAO) -->
+<section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 gsap-reveal">
+  <div class="relative bg-gradient-to-br from-[#1c1c1c] via-[#241c14] to-[#1a120b] border-2 border-amber-500/40 rounded-3xl p-8 sm:p-12 shadow-2xl overflow-hidden glow-amber-hover">
+    
+    <!-- Steam particles animation -->
+    <div class="steam-container">
+      <div class="steam-particle"></div>
+      <div class="steam-particle"></div>
+      <div class="steam-particle"></div>
+    </div>
+
+    <!-- Background Decorative Tag -->
+    <div class="absolute -right-12 -top-12 opacity-10 pointer-events-none">
+      <i class="fa-solid fa-crown text-[240px] text-amber-500"></i>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+      
+      <!-- Image Section -->
+      <div class="lg:col-span-5">
+        <div class="relative rounded-2xl overflow-hidden border-2 border-amber-500/30 group">
+          
+            <img src="media/specials/kabuli_pulao.png" alt="Friday Special: Authentic Kabuli Pulao" class="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-700" />
+          
+          <div class="absolute top-4 left-4 bg-streetRed text-white font-extrabold text-xs uppercase px-3 py-1.5 rounded-lg shadow-lg">
+            FRIDAY SPECIAL
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Section -->
+      <div class="lg:col-span-7 space-y-5">
+        
+        <!-- Friday Offer Badge -->
+        <div class="flex flex-wrap items-center gap-4">
+          <span class="bg-amber-500 text-black font-extrabold px-5 py-2 rounded-full text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg shadow-amber-500/20">
+            <i class="fa-solid fa-calendar-check"></i> Only Friday Offer
+          </span>
+        </div>
+
+        <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+          Friday Special: Authentic Kabuli Pulao
+        </h2>
+
+        <p class="text-gray-300 text-base leading-relaxed">
+          
+            Slow-cooked tender beef shank cooked with aromatic long-grain basmati rice, caramelized sweet carrot juliennes, golden raisins, roasted almonds, and authentic Pashtun secret spices. Served fresh hot every Friday!
+          
+        </p>
+
+        <!-- Pricing Badge & Order CTA -->
+        <div class="flex flex-wrap items-center gap-6 pt-2">
+          <div class="flex items-baseline gap-3">
+            <span class="font-heading text-4xl font-black text-amber-500">
+              Rs 799
+            </span>
+            
+              <span class="text-gray-500 line-through text-lg font-bold">Rs 999</span>
+            
+          </div>
+
+          <button onclick="orderOnWhatsApp('Friday Special Kabuli Pulao', '799')" 
+                  class="px-8 py-3.5 bg-gradient-to-r from-amber-500 to-streetRed text-white font-extrabold rounded-xl shadow-lg hover:scale-105 transition-transform flex items-center gap-2">
+            <i class="fa-brands fa-whatsapp text-xl"></i> Claim Friday Deal Now
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PROMOTIONAL DEALS (FRIENDS, FAMILY, LOVER DEAL) -->
+<section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 gsap-reveal">
+  <div class="text-center space-y-3 mb-12">
+    <h2 class="font-heading text-3xl sm:text-5xl font-black text-white">
+      HOT <span class="text-amber-500">STREET DEALS</span> & COMBOS
+    </h2>
+    <p class="text-gray-400 text-base max-w-xl mx-auto">
+      Super savings bundles tailored for best friends, couples, and big family celebrations!
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    
+    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+      
+      <div>
+        <div class="relative h-48 rounded-2xl overflow-hidden mb-5">
+          
+            <img src="media/deals/friends_deal.png" alt="Friends Deal" class="w-full h-full object-cover" />
+          
+          <div class="absolute top-3 right-3 bg-amber-500 text-black font-black text-xs px-3 py-1 rounded-full uppercase">
+            BESTSELLER
+          </div>
+        </div>
+
+        <h3 class="font-heading text-2xl font-black text-white mb-2">Friends Deal</h3>
+        <p class="text-amber-400 font-semibold text-xs uppercase tracking-wider mb-4">Perfect street combo for 3 Best Friends!</p>
+        
+        <div class="bg-[#121212] p-4 rounded-xl mb-6 text-sm text-gray-300 space-y-2 border border-gray-800">
+          <p class="font-semibold text-gray-400 text-xs uppercase">Included Items:</p>
+          <p class="leading-relaxed">2 Medium Pizzas (Any Flavor) + 2 Zinger Burgers + 1 Large Cheesy Fries + 1.5L Soft Drink</p>
+        </div>
+      </div>
+
+      <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+        <div>
+          <span class="text-xs text-gray-400 block font-medium">Bundle Price</span>
+          <span class="font-heading text-2xl font-black text-amber-500">Rs 1399</span>
+        </div>
+        <button onclick="orderOnWhatsApp('Friends Deal', '1399')" 
+                class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-black font-extrabold rounded-xl transition-all text-sm flex items-center gap-2">
+          <i class="fa-brands fa-whatsapp"></i> Order
+        </button>
+      </div>
+
+    </div>
+    
+    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+      
+      <div>
+        <div class="relative h-48 rounded-2xl overflow-hidden mb-5">
+          
+            <img src="media/deals/lover_deal.png" alt="Lover Deal" class="w-full h-full object-cover" />
+          
+          <div class="absolute top-3 right-3 bg-amber-500 text-black font-black text-xs px-3 py-1 rounded-full uppercase">
+            BESTSELLER
+          </div>
+        </div>
+
+        <h3 class="font-heading text-2xl font-black text-white mb-2">Lover Deal</h3>
+        <p class="text-amber-400 font-semibold text-xs uppercase tracking-wider mb-4">Romantic Street Food Date Special for Two!</p>
+        
+        <div class="bg-[#121212] p-4 rounded-xl mb-6 text-sm text-gray-300 space-y-2 border border-gray-800">
+          <p class="font-semibold text-gray-400 text-xs uppercase">Included Items:</p>
+          <p class="leading-relaxed">1 Large Heart-Shape Pizza + 2 Double Beef Burgers + Molten Chocolate Lava Cake + 2 Mint Margaritas</p>
+        </div>
+      </div>
+
+      <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+        <div>
+          <span class="text-xs text-gray-400 block font-medium">Bundle Price</span>
+          <span class="font-heading text-2xl font-black text-amber-500">Rs 1399</span>
+        </div>
+        <button onclick="orderOnWhatsApp('Lover Deal', '1399')" 
+                class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-black font-extrabold rounded-xl transition-all text-sm flex items-center gap-2">
+          <i class="fa-brands fa-whatsapp"></i> Order
+        </button>
+      </div>
+
+    </div>
+    
+    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+      
+      <div>
+        <div class="relative h-48 rounded-2xl overflow-hidden mb-5">
+          
+            <img src="media/deals/family_deal.png" alt="Family Deal" class="w-full h-full object-cover" />
+          
+          <div class="absolute top-3 right-3 bg-amber-500 text-black font-black text-xs px-3 py-1 rounded-full uppercase">
+            BESTSELLER
+          </div>
+        </div>
+
+        <h3 class="font-heading text-2xl font-black text-white mb-2">Family Deal</h3>
+        <p class="text-amber-400 font-semibold text-xs uppercase tracking-wider mb-4">Ultimate Feast for the Whole Squad &amp; Family!</p>
+        
+        <div class="bg-[#121212] p-4 rounded-xl mb-6 text-sm text-gray-300 space-y-2 border border-gray-800">
+          <p class="font-semibold text-gray-400 text-xs uppercase">Included Items:</p>
+          <p class="leading-relaxed">2 Large Crown Crust Pizzas + 4 Zinger Burgers + Bucket Loaded Fries + 6 Garlicky Rolls + 2.25L Soft Drink</p>
+        </div>
+      </div>
+
+      <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+        <div>
+          <span class="text-xs text-gray-400 block font-medium">Bundle Price</span>
+          <span class="font-heading text-2xl font-black text-amber-500">Rs 2599</span>
+        </div>
+        <button onclick="orderOnWhatsApp('Family Deal', '2599')" 
+                class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-black font-extrabold rounded-xl transition-all text-sm flex items-center gap-2">
+          <i class="fa-brands fa-whatsapp"></i> Order
+        </button>
+      </div>
+
+    </div>
+    
+  </div>
+</section>
+
+<!-- WHY CHOOSE US (ANIMATED CARTOON BADGES) -->
+<section class="py-16 bg-[#181818] border-y border-amber-500/10 gsap-reveal">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="font-heading text-3xl sm:text-4xl font-black text-white">
+        WHY KHAN <span class="text-amber-500">FOOD STREET</span>?
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      <!-- Badge 1: Fast Delivery -->
+      <div class="bg-[#1c1c1c] p-8 rounded-3xl text-center border border-amber-500/20 glow-amber-hover space-y-4">
+        <div class="w-20 h-20 mx-auto rounded-2xl bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-500 text-4xl shadow-lg">
+          <i class="fa-solid fa-motorcycle animate-bounce" style="animation-duration: 2s;"></i>
+        </div>
+        <h3 class="font-heading text-xl font-extrabold text-white">Lightning Fast Delivery</h3>
+        <p class="text-sm text-gray-400 leading-relaxed">
+          Hot & fresh food delivered to your doorstep in 30 minutes or less with thermal insulated packaging.
+        </p>
+      </div>
+
+      <!-- Badge 2: 100% Fresh -->
+      <div class="bg-[#1c1c1c] p-8 rounded-3xl text-center border border-amber-500/20 glow-amber-hover space-y-4">
+        <div class="w-20 h-20 mx-auto rounded-2xl bg-streetRed/10 border border-streetRed/40 flex items-center justify-center text-streetRed text-4xl shadow-lg">
+          <i class="fa-solid fa-leaf animate-pulse"></i>
+        </div>
+        <h3 class="font-heading text-xl font-extrabold text-white">100% Fresh Halal Ingredients</h3>
+        <p class="text-sm text-gray-400 leading-relaxed">
+          Daily sourced meats, fresh farm vegetables, and premium mozzarella cheese with zero frozen compromises.
+        </p>
+      </div>
+
+      <!-- Badge 3: Secret Spices -->
+      <div class="bg-[#1c1c1c] p-8 rounded-3xl text-center border border-amber-500/20 glow-amber-hover space-y-4">
+        <div class="w-20 h-20 mx-auto rounded-2xl bg-emerald-500/10 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-4xl shadow-lg">
+          <i class="fa-solid fa-pepper-hot"></i>
+        </div>
+        <h3 class="font-heading text-xl font-extrabold text-white">Authentic Secret Spices</h3>
+        <p class="text-sm text-gray-400 leading-relaxed">
+          Proprietary street spice marinades perfected over generations for unforgettable explosive taste!
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+  </main>
+
+  <!-- Persistent Floating WhatsApp Direct Contact Button -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <a href="https://wa.me/923442041131?text=Hello%20KFS!%20I%20am%20interested%20in%20ordering%20food." target="_blank" 
+       class="pulse-badge w-14 h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full flex items-center justify-center text-3xl shadow-2xl hover:scale-110 transition-all border-2 border-white/20"
+       title="Chat & Order on WhatsApp (+92 344 2041131)">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-[#181818] border-t border-amber-500/20 pt-16 pb-12 mt-20 relative z-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+        
+        <!-- Col 1: Brand Info -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center text-black font-bold text-xl">KFS</div>
+            <span class="font-heading text-xl font-black text-white">KHAN <span class="text-amber-500">FOOD STREET</span></span>
+          </div>
+          <p class="text-sm text-gray-400 leading-relaxed">
+            Serving the boldest street flavors in town! From authentic Friday Kabuli Pulao to cheesy loaded pizzas and spicy zinger burgers.
+          </p>
+          <div class="flex space-x-4 pt-2">
+            <a href="#" class="w-9 h-9 rounded-full bg-[#242424] hover:bg-amber-500 hover:text-black transition-colors flex items-center justify-center text-gray-300"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="w-9 h-9 rounded-full bg-[#242424] hover:bg-amber-500 hover:text-black transition-colors flex items-center justify-center text-gray-300"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="w-9 h-9 rounded-full bg-[#242424] hover:bg-amber-500 hover:text-black transition-colors flex items-center justify-center text-gray-300"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <!-- Col 2: Quick Links -->
+        <div>
+          <h4 class="text-lg font-bold text-amber-500 mb-4 font-heading">Quick Links</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="index.html" class="hover:text-white transition-colors">Home Page</a></li>
+            <li><a href="menu.html" class="hover:text-white transition-colors">Explore Menu</a></li>
+            <li><a href="deals.html" class="hover:text-white transition-colors">Deals & Offers</a></li>
+            <li><a href="gallery.html" class="hover:text-white transition-colors">Photo Gallery</a></li>
+            <li><a href="contact.html" class="hover:text-white transition-colors">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Operational Hours -->
+        <div>
+          <h4 class="text-lg font-bold text-amber-500 mb-4 font-heading">Opening Hours</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li class="flex justify-between border-b border-gray-800 pb-1">
+              <span>Monday - Thursday:</span>
+              <span class="text-white font-medium">4:00 PM - 2:00 AM</span>
+            </li>
+            <li class="flex justify-between border-b border-gray-800 pb-1 text-amber-400 font-semibold">
+              <span>Friday (Kabuli Pulao):</span>
+              <span>12:30 PM - 2:30 AM</span>
+            </li>
+            <li class="flex justify-between border-b border-gray-800 pb-1">
+              <span>Saturday - Sunday:</span>
+              <span class="text-white font-medium">2:00 PM - 3:00 AM</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Contact & WhatsApp -->
+        <div>
+          <h4 class="text-lg font-bold text-amber-500 mb-4 font-heading">Direct Contact</h4>
+          <div class="space-y-3 text-sm text-gray-400">
+            <p class="flex items-center gap-3">
+              <i class="fa-solid fa-phone text-amber-500"></i>
+              <span>+92 344 2041131</span>
+            </p>
+            <p class="flex items-center gap-3">
+              <i class="fa-brands fa-whatsapp text-emerald-400 text-lg"></i>
+              <span>0344 2041131</span>
+            </p>
+            <p class="flex items-center gap-3">
+              <i class="fa-solid fa-location-dot text-streetRed text-lg"></i>
+              <span>Khan Food Street Hub, Main Commercial Boulevard</span>
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="border-t border-gray-800 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+        <p>&copy; 2026 KFS (Khan Food Street). All Rights Reserved.</p>
+        <p class="mt-2 md:mt-0">Designed & Powered with Passion for Good Food.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script for Mobile Navigation -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('mobile-menu-btn');
+      const menu = document.getElementById('mobile-menu');
+
+      if (btn && menu) {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu if user clicks or touches anywhere outside
+        const closeMenuOutside = (e) => {
+          if (!menu.contains(e.target) && !btn.contains(e.target)) {
+            menu.classList.add('hidden');
+          }
+        };
+
+        document.addEventListener('click', closeMenuOutside);
+        document.addEventListener('touchstart', closeMenuOutside, { passive: true });
+      }
+    });
+  </script>
+  <script src="static/js/animations.js"></script>
+</body>
+</html>
