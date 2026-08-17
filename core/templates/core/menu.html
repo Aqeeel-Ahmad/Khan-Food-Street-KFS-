@@ -18,24 +18,24 @@
 <section class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
   
   <!-- Category Filter Pills -->
-  <div class="flex flex-wrap items-center justify-center gap-3 mb-12">
-    <a href="{% url 'menu' %}?category=all" 
-       class="px-6 py-3 rounded-2xl font-bold text-sm transition-all {% if selected_category == 'all' %}bg-amber-500 text-black shadow-lg shadow-amber-500/30 scale-105{% else %}bg-[#1c1c1c] text-gray-300 hover:bg-gray-800 border border-gray-800{% endif %}">
+  <div class="flex flex-wrap items-center justify-center gap-3 mb-12" id="category-pills">
+    <button data-cat-filter="all" 
+       class="category-btn px-6 py-3 rounded-2xl font-bold text-sm transition-all bg-amber-500 text-black shadow-lg shadow-amber-500/30 scale-105">
       <i class="fa-solid fa-list-ul mr-2"></i> All Delicacies
-    </a>
+    </button>
 
     {% for cat in categories %}
-    <a href="{% url 'menu' %}?category={{ cat.slug }}" 
-       class="px-6 py-3 rounded-2xl font-bold text-sm transition-all {% if selected_category == cat.slug %}bg-amber-500 text-black shadow-lg shadow-amber-500/30 scale-105{% else %}bg-[#1c1c1c] text-gray-300 hover:bg-gray-800 border border-gray-800{% endif %}">
+    <button data-cat-filter="{{ cat.slug }}" 
+       class="category-btn px-6 py-3 rounded-2xl font-bold text-sm transition-all bg-[#1c1c1c] text-gray-300 hover:bg-gray-800 border border-gray-800">
       <i class="fa-solid {{ cat.icon }} mr-2 text-amber-400"></i> {{ cat.name }}
-    </a>
+    </button>
     {% endfor %}
   </div>
 
   <!-- Products Grid -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="products-grid">
     {% for product in products %}
-    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+    <div class="product-item tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover" data-category="{{ product.category.slug }}">
       
       <div>
         <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
@@ -94,7 +94,7 @@
 
     </div>
     {% empty %}
-    <div class="col-span-3 text-center py-12 text-gray-400">
+    <div class="col-span-3 text-center py-12 text-gray-400" id="empty-msg">
       <i class="fa-solid fa-utensils text-5xl mb-4 text-gray-600"></i>
       <p class="text-lg">No food items found in this category.</p>
     </div>
@@ -102,5 +102,44 @@
   </div>
 
 </section>
+
+<!-- Client-Side Category Filtering Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.category-btn');
+    const items = document.querySelectorAll('.product-item');
+
+    function filterCategory(catSlug) {
+      buttons.forEach(btn => {
+        if (btn.getAttribute('data-cat-filter') === catSlug) {
+          btn.className = 'category-btn px-6 py-3 rounded-2xl font-bold text-sm transition-all bg-amber-500 text-black shadow-lg shadow-amber-500/30 scale-105';
+        } else {
+          btn.className = 'category-btn px-6 py-3 rounded-2xl font-bold text-sm transition-all bg-[#1c1c1c] text-gray-300 hover:bg-gray-800 border border-gray-800';
+        }
+      });
+
+      items.forEach(item => {
+        const itemCat = item.getAttribute('data-category');
+        if (catSlug === 'all' || itemCat === catSlug) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cat = btn.getAttribute('data-cat-filter');
+        filterCategory(cat);
+      });
+    });
+
+    // Check URL search params for category
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialCat = urlParams.get('category') || 'all';
+    filterCategory(initialCat);
+  });
+</script>
 
 {% endblock %}

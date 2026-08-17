@@ -133,44 +133,44 @@
 <section class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
   
   <!-- Category Filter Pills -->
-  <div class="flex flex-wrap items-center justify-center gap-3 mb-12">
-    <a href="/menu/?category=all" 
-       class="px-6 py-3 rounded-2xl font-bold text-sm transition-all bg-amber-500 text-black shadow-lg shadow-amber-500/30 scale-105">
+  <div class="flex flex-wrap items-center justify-center gap-3 mb-12" id="category-pills">
+    <button data-cat-filter="all" 
+       class="category-btn px-6 py-3 rounded-2xl font-bold text-sm transition-all bg-amber-500 text-black shadow-lg shadow-amber-500/30 scale-105">
       <i class="fa-solid fa-list-ul mr-2"></i> All Delicacies
-    </a>
+    </button>
 
     
-    <a href="/menu/?category=pizzas" 
-       class="px-6 py-3 rounded-2xl font-bold text-sm transition-all bg-[#1c1c1c] text-gray-300 hover:bg-gray-800 border border-gray-800">
+    <button data-cat-filter="pizzas" 
+       class="category-btn px-6 py-3 rounded-2xl font-bold text-sm transition-all bg-[#1c1c1c] text-gray-300 hover:bg-gray-800 border border-gray-800">
       <i class="fa-solid fa-pizza-slice mr-2 text-amber-400"></i> Pizzas
-    </a>
+    </button>
     
-    <a href="/menu/?category=burgers-shawarmas" 
-       class="px-6 py-3 rounded-2xl font-bold text-sm transition-all bg-[#1c1c1c] text-gray-300 hover:bg-gray-800 border border-gray-800">
+    <button data-cat-filter="burgers-shawarmas" 
+       class="category-btn px-6 py-3 rounded-2xl font-bold text-sm transition-all bg-[#1c1c1c] text-gray-300 hover:bg-gray-800 border border-gray-800">
       <i class="fa-solid fa-burger mr-2 text-amber-400"></i> Burgers &amp; Shawarmas
-    </a>
+    </button>
     
-    <a href="/menu/?category=fries-sides" 
-       class="px-6 py-3 rounded-2xl font-bold text-sm transition-all bg-[#1c1c1c] text-gray-300 hover:bg-gray-800 border border-gray-800">
+    <button data-cat-filter="fries-sides" 
+       class="category-btn px-6 py-3 rounded-2xl font-bold text-sm transition-all bg-[#1c1c1c] text-gray-300 hover:bg-gray-800 border border-gray-800">
       <i class="fa-solid fa-french-fries mr-2 text-amber-400"></i> Fries &amp; Sides
-    </a>
+    </button>
     
-    <a href="/menu/?category=pasta-noodles" 
-       class="px-6 py-3 rounded-2xl font-bold text-sm transition-all bg-[#1c1c1c] text-gray-300 hover:bg-gray-800 border border-gray-800">
+    <button data-cat-filter="pasta-noodles" 
+       class="category-btn px-6 py-3 rounded-2xl font-bold text-sm transition-all bg-[#1c1c1c] text-gray-300 hover:bg-gray-800 border border-gray-800">
       <i class="fa-solid fa-bowl-food mr-2 text-amber-400"></i> Pasta &amp; Noodles
-    </a>
+    </button>
     
-    <a href="/menu/?category=beverages-shakes" 
-       class="px-6 py-3 rounded-2xl font-bold text-sm transition-all bg-[#1c1c1c] text-gray-300 hover:bg-gray-800 border border-gray-800">
+    <button data-cat-filter="beverages-shakes" 
+       class="category-btn px-6 py-3 rounded-2xl font-bold text-sm transition-all bg-[#1c1c1c] text-gray-300 hover:bg-gray-800 border border-gray-800">
       <i class="fa-solid fa-glass-water mr-2 text-amber-400"></i> Beverages &amp; Shakes
-    </a>
+    </button>
     
   </div>
 
   <!-- Products Grid -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="products-grid">
     
-    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+    <div class="product-item tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover" data-category="burgers-shawarmas">
       
       <div>
         <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
@@ -234,7 +234,7 @@
 
     </div>
     
-    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+    <div class="product-item tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover" data-category="fries-sides">
       
       <div>
         <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
@@ -293,7 +293,7 @@
 
     </div>
     
-    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+    <div class="product-item tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover" data-category="pizzas">
       
       <div>
         <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
@@ -370,7 +370,7 @@
 
     </div>
     
-    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+    <div class="product-item tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover" data-category="burgers-shawarmas">
       
       <div>
         <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
@@ -438,7 +438,7 @@
 
     </div>
     
-    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+    <div class="product-item tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover" data-category="burgers-shawarmas">
       
       <div>
         <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
@@ -502,7 +502,7 @@
 
     </div>
     
-    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+    <div class="product-item tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover" data-category="beverages-shakes">
       
       <div>
         <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
@@ -557,7 +557,7 @@
 
     </div>
     
-    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+    <div class="product-item tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover" data-category="burgers-shawarmas">
       
       <div>
         <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
@@ -617,7 +617,7 @@
 
     </div>
     
-    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+    <div class="product-item tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover" data-category="pasta-noodles">
       
       <div>
         <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
@@ -681,7 +681,7 @@
 
     </div>
     
-    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+    <div class="product-item tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover" data-category="pizzas">
       
       <div>
         <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
@@ -745,7 +745,7 @@
 
     </div>
     
-    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+    <div class="product-item tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover" data-category="pasta-noodles">
       
       <div>
         <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
@@ -800,7 +800,7 @@
 
     </div>
     
-    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+    <div class="product-item tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover" data-category="pasta-noodles">
       
       <div>
         <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
@@ -859,7 +859,7 @@
 
     </div>
     
-    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+    <div class="product-item tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover" data-category="beverages-shakes">
       
       <div>
         <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
@@ -910,7 +910,7 @@
 
     </div>
     
-    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+    <div class="product-item tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover" data-category="fries-sides">
       
       <div>
         <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
@@ -970,7 +970,7 @@
 
     </div>
     
-    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+    <div class="product-item tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover" data-category="fries-sides">
       
       <div>
         <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
@@ -1026,7 +1026,7 @@
 
     </div>
     
-    <div class="tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover">
+    <div class="product-item tilt-card bg-[#1c1c1c] border border-amber-500/20 rounded-3xl overflow-hidden p-6 flex flex-col justify-between glow-amber-hover" data-category="beverages-shakes">
       
       <div>
         <div class="relative h-56 rounded-2xl overflow-hidden mb-5">
@@ -1084,6 +1084,45 @@
   </div>
 
 </section>
+
+<!-- Client-Side Category Filtering Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.category-btn');
+    const items = document.querySelectorAll('.product-item');
+
+    function filterCategory(catSlug) {
+      buttons.forEach(btn => {
+        if (btn.getAttribute('data-cat-filter') === catSlug) {
+          btn.className = 'category-btn px-6 py-3 rounded-2xl font-bold text-sm transition-all bg-amber-500 text-black shadow-lg shadow-amber-500/30 scale-105';
+        } else {
+          btn.className = 'category-btn px-6 py-3 rounded-2xl font-bold text-sm transition-all bg-[#1c1c1c] text-gray-300 hover:bg-gray-800 border border-gray-800';
+        }
+      });
+
+      items.forEach(item => {
+        const itemCat = item.getAttribute('data-category');
+        if (catSlug === 'all' || itemCat === catSlug) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cat = btn.getAttribute('data-cat-filter');
+        filterCategory(cat);
+      });
+    });
+
+    // Check URL search params for category
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialCat = urlParams.get('category') || 'all';
+    filterCategory(initialCat);
+  });
+</script>
 
 
   </main>
